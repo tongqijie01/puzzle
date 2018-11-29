@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#test{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			position: absolute;
+			top:50px;
+			left:0;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="box">欢迎大家学习Javascript</h1>
+	<p>所见即所得</p>
+	<p id="test">测试区域</p>
+</body>
+</html>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js">
+
+</script>
+<script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="js/jquery.hammer.js">	
+
+</script>
+<!-- <script>	
+//创建一个新的hammer对象并且在初始化时指定要处理的dom
+var hammer = new Hammer(document.getElementById('box'));
+//为该dom 元素绑定触屏移动事件
+hammer.on("pan",function(ev){
+	console.log(ev);
+})
+hammer.on("tap",function(ev){
+	console.log(ev);
+	console.log("事件名称:"+ev.type);
+	console.log("X坐标:"+ev.deltaX);
+	console.log("Y坐标:"+ev.deltaY);
+})
+</script> -->
+<script>
+var hammer = $("#test").hammer();
+hammer.on("panstart",function(ev){
+	console.log("拖动开始");
+	console.log(ev);
+})
+hammer.on("panmove",function(ev){
+	console.log("拖动...");
+	console.log("X坐标:"+ev.gesture.deltaX);
+	console.log("Y坐标:"+ev.gesture.deltaY);
+	$("#test").css("top",ev.gesture.deltaY+"px");
+	$("#test").css("left",ev.gesture.deltaX+"px");
+})
+hammer.on("panend",function(ev){
+	console.log("拖动结束");
+	console.log(ev);
+})
+</script>
